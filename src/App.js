@@ -9,7 +9,7 @@ import { Container } from 'react-bootstrap';
 
 function App() {
   const [endpoint, setEndpoint] = useState('character');
-  const [loading, data, error] = useFetch(endpoint);
+  const { loading, data, error } = useFetch(endpoint);
   const { results: characters, info } = data;
 
   const findCharacters = (character) => {
@@ -18,9 +18,11 @@ function App() {
 
   if (loading) return <Loading />;
 
+  // if (error) return <h3>Ocurrió un error</h3>;
+
   return (
     <Container>
-      <Search />
+      <Search findCharacters={findCharacters} />
       <Characters characters={characters} />
     </Container>
   );

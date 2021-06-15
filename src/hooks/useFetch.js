@@ -1,19 +1,18 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback, useReducer } from 'react';
+import { FETCH_ACTIONS } from '../actions/fetch';
 import { API } from '../constants/API';
+import { fetchReducer, initialState } from '../reducers/fetch';
 
 export const useFetch = (endpoint = '') => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({});
-  const [error, setError] = useState(false);
+  const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   const getData = useCallback(async () => {
     try {
       const { data } = await API.get(`${endpoint}`);
-      setData(data);
-      setLoading(false);
+      dispatch({ type: FETCH_ACTIONS.SET_DATA, payload: data });
     } catch (e) {
       console.log(e);
-      setError(true);
+      dispatch({ type: FETCH_ACTIONS.SET_ERROR });
     }
   }, [endpoint]);
 
@@ -21,5 +20,5 @@ export const useFetch = (endpoint = '') => {
     getData();
   }, [endpoint, getData]);
 
-  return [loading, data, error];
+  return state;
 };

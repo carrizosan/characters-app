@@ -5,10 +5,13 @@ import { Card, Col } from 'react-bootstrap';
 const Character = ({ id, name, image, status, gender, species, created }) => {
   return (
     <Col md={4} sm={12}>
-      <Card className='character-margin'>
-        <Card.Img variant='top' src={image} />
+      <Card className='character-card'>
+        <Card.Img className='character-image' variant='top' src={image} />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
+          <Card.Title className='character-title-color'>
+            <b>{name}</b>
+          </Card.Title>
+
           <Card.Text>#{id}</Card.Text>
           <Card.Text>Status: {status}</Card.Text>
           <Card.Text>Created: {created}</Card.Text>
