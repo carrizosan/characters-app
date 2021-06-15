@@ -7,7 +7,9 @@ const Characters = ({ characters }) => {
   return (
     <Container>
       <Row className='justify-content-center'>
-        <Character />
+        {characters?.map((character) => (
+          <Character key={character.id} {...character} />
+        ))}
       </Row>
     </Container>
   );
@@ -22,7 +24,7 @@ Characters.propTypes = {
       gender: PropTypes.string,
       species: PropTypes.string,
       status: PropTypes.string,
-    }).isRequired
+    })
   ),
 };
 

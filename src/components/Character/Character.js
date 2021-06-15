@@ -2,17 +2,18 @@ import PropTypes from 'prop-types';
 
 import { Card, Col } from 'react-bootstrap';
 
-const Character = ({ character }) => {
+const Character = ({ id, name, image, status, gender, species, created }) => {
   return (
-    <Col>
-      <Card>
-        <Card.Img variant='top' src='holder.js/100px160' />
+    <Col md={4} sm={12}>
+      <Card className='character-margin'>
+        <Card.Img variant='top' src={image} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in to additional content. This content is
-            a little bit longer.
-          </Card.Text>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>#{id}</Card.Text>
+          <Card.Text>Status: {status}</Card.Text>
+          <Card.Text>Created: {created}</Card.Text>
+          <Card.Text>Gender: {gender}</Card.Text>
+          <Card.Text>Species: {species}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className='text-muted'>Last updated 3 mins ago</small>
@@ -30,7 +31,8 @@ Character.propTypes = {
     gender: PropTypes.string,
     species: PropTypes.string,
     status: PropTypes.string,
-  }).isRequired,
+    image: PropTypes.string,
+  }),
 };
 
 export default Character;
